@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: osint-main-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: PORT
+        value: 8000
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false  # Set manually in Render dashboard
+      - key: BOT_USERNAME
+        value: reosintbot
+      - key: OSINT_API_BASE_URL
+        value: https://osint.stormx.pw/index.cpp
+      - key: OSINT_API_KEY
+        value: dark
+      - key: ADMIN_USER_ID
+        value: "5682019164"
+      - key: LOG_LEVEL
+        value: INFO

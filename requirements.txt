@@ -1,0 +1,18 @@
+# Production requirements for OSINT Telegram Bot
+# Updated for security and stability
+
+# Telegram Bot Framework
+python-telegram-bot==21.8
+
+# HTTP requests
+requests==2.32.3
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Input validation
+validators==0.34.0
+
+# Production dependencies
+gunicorn==21.2.0
+psutil==6.1.0
