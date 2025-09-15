@@ -1,0 +1,61 @@
+# .gitignore for OSINT Main Bot
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+osint_bot.db
+user_data.db
+
+# API Keys and sensitive files
+*token*
+*key*
+*secret*
+*credentials*
+config.json
+secrets.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Health check files
+health_check.py.backup
+
+# Local development
+local_test/
+debug/
+test_data/
