@@ -8,8 +8,6 @@ services:
     envVars:
       - key: PYTHONUNBUFFERED
         value: 1
-      - key: PORT
-        value: 8000
       - key: SUPABASE_URL
         sync: false  # Set manually in Render dashboard
       - key: SUPABASE_KEY
