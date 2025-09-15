@@ -27,7 +27,6 @@ from telegram.ext import (
     ContextTypes,
 )
 from subscription_manager import SubscriptionManager
-from health_check import HealthCheckServer
 
 # Load environment variables
 load_dotenv()
@@ -103,23 +102,6 @@ class OSINTBot:
             admin_username="ded_xdk",  # Admin contact for subscriptions
             admin_id=int(os.getenv('ADMIN_USER_ID', '5682019164'))
         )
-        
-        # Health check setup
-        self.health_server = HealthCheckServer(
-            port=int(os.getenv('PORT', '8000')),
-            bot_status_func=self.get_health_status
-        )
-    
-    def get_health_status(self):
-        """Get bot health status for monitoring"""
-        uptime = (datetime.now() - self.start_time).total_seconds()
-        return {
-            'healthy': self.is_healthy,
-            'uptime': uptime,
-            'name': f'OSINT Bot (@{self.bot_username})',
-            'subscription_db': self.subscription_manager.db is not None
-        }
-    
     async def error_handler(self, update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
         """Handle errors in the bot"""
         logger.error(f"Exception while handling an update: {context.error}")
@@ -1056,10 +1038,6 @@ Need assistance? The bot will guide you through each command.
     def run(self):
         """Start the bot with health monitoring"""
         try:
-            # Start health check server
-            logger.info("Starting health check server...")
-            self.health_server.start()
-            
             # Create the Application
             application = Application.builder().token(self.bot_token).build()
             
@@ -1100,11 +1078,6 @@ Need assistance? The bot will guide you through each command.
         except Exception as e:
             logger.error(f"Error starting bot: {e}")
             raise
-        finally:
-            # Stop health server on shutdown
-            if self.health_server:
-                logger.info("Stopping health check server...")
-                self.health_server.stop()
 
 
 def main():

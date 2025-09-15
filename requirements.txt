@@ -15,7 +15,4 @@ validators==0.34.0
 
 # Supabase client
 supabase==2.8.0
-
-# Production dependencies
-gunicorn==21.2.0
 psutil==6.1.0
